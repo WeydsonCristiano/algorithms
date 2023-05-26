@@ -4,29 +4,22 @@ def is_valid_period(period):
         and len(period) == 2
         and isinstance(period[0], int)
         and isinstance(period[1], int)
+        and period[0] <= period[1]
     ):
-        start_time, end_time = period
-        if start_time <= end_time:
-            return True
-        else:
-            print(f"Invalid period: {period}.")
-    else:
-        print(f"Invalid period: {period}. ")
+        return True
     return False
 
 
 def study_schedule(permanence_periods, target_time):
-    if not all(is_valid_period(period) for period in permanence_periods):
+    if (
+        not all(is_valid_period(period) for period in permanence_periods)
+        or target_time is None
+    ):
         return None
-
-    permanence_periods.sort(key=lambda period: period[1])
-    dp = [float("inf")] * (target_time + 1)
-    dp[0] = 0
-
+    people = []
     for period in permanence_periods:
         start_time, end_time = period
-        for time in range(start_time, target_time + 1):
-            if dp[time - start_time] < float("inf"):
-                dp[time] = min(dp[time], dp[time - start_time] + 1)
+        if (start_time <= target_time) and (end_time >= target_time):
+            people.append(period)
 
-    return dp[target_time] if dp[target_time] != float("inf") else None
+    return len(people)
