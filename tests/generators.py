@@ -80,7 +80,7 @@ def generate_palindromes(size: int) -> str:
     """
     string = big_o.datagen.strings(size)
     mid = size // 2
-    return string[:mid] + string[mid: size - mid] + string[mid - 1:: -1]
+    return string[:mid] + string[mid : size - mid] + string[mid - 1 :: -1]
 
 
 @lru_cache
