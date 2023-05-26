@@ -9,13 +9,9 @@ def is_valid_period(period):
         if start_time <= end_time:
             return True
         else:
-            print(
-                f"Invalid period: {period}."
-            )
+            print(f"Invalid period: {period}.")
     else:
-        print(
-            f"Invalid period: {period}. "
-        )
+        print(f"Invalid period: {period}. ")
     return False
 
 
